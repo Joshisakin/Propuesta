@@ -1,0 +1,9 @@
+namespace Propuesta.Views;
+
+public partial class StandingsView : ContentPage
+{
+	public StandingsView()
+	{
+		InitializeComponent();
+	}
+}

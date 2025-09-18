@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Propuesta.Views.DashboardView"
+             Title="Campeonato de Fútbol">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="20"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Label
+                Text="Bienvenido al Gestor de Campeonatos"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="TeamsBtn"
+                Text="Equipos"
+                SemanticProperties.Hint="Navega a la sección de equipos"
+                Command="{Binding GoToTeamsCommand}"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="MatchesBtn"
+                Text="Partidos"
+                SemanticProperties.Hint="Navega a la sección de partidos"
+                Command="{Binding GoToMatchesCommand}"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="StandingsBtn"
+                Text="Tabla de Posiciones"
+                SemanticProperties.Hint="Navega a la tabla de posiciones"
+                Command="{Binding GoToStandingsCommand}"
+                HorizontalOptions="Center" />
+                
+            <Button
+                x:Name="RegisterPaymentBtn"
+                Text="Registrar Pago"
+                SemanticProperties.Hint="Navega a la sección de registro de pagos"
+                Command="{Binding GoToRegisterPaymentCommand}"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

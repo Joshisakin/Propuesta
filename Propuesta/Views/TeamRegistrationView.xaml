@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Propuesta.Views.TeamRegistrationView"
+             xmlns:viewmodels="clr-namespace:Propuesta.ViewModels"
+             Title="Registrar Equipo">
+    <ContentPage.BindingContext>
+        <viewmodels:TeamRegistrationViewModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+            <Label Text="Nombre del Equipo" />
+            <Entry Text="{Binding TeamName}" Placeholder="Ej: Los Halcones" />
+
+            <Label Text="Descripción" />
+            <Editor Text="{Binding TeamDescription}" Placeholder="Ej: Equipo del barrio El Carmen" AutoSize="TextChanges" />
+
+            <Button Text="Seleccionar Logo" Command="{Binding SelectLogoCommand}" HorizontalOptions="Start" />
+            <Image Source="{Binding LogoPath}" HeightRequest="100" Aspect="AspectFit" HorizontalOptions="Center" />
+
+            <Label Text="Nombre del Delegado" Margin="0,20,0,0" />
+            <Entry Text="{Binding DelegateName}" Placeholder="Ej: Roberto Gomez" />
+            
+            <Label Text="DNI del Delegado" />
+            <Entry Text="{Binding DelegateDNI}" Keyboard="Numeric" />
+
+            <Label Text="Móvil del Delegado" />
+            <Entry Text="{Binding DelegateMobile}" Keyboard="Telephone" />
+
+            <Button Text="Guardar Equipo" Command="{Binding SaveTeamCommand}" HorizontalOptions="Center" Margin="0,30,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

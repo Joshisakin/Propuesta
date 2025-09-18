@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Propuesta.Models"
+             xmlns:viewmodels="clr-namespace:Propuesta.ViewModels"
+             x:Class="Propuesta.Views.TeamDetailView"
+             x:DataType="viewmodels:TeamDetailViewModel"
+             Title="Detalle del Equipo">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+            <Image Source="{Binding Team.LogoUrl}" HeightRequest="100" Aspect="AspectFit" HorizontalOptions="Center"/>
+            <Label Text="{Binding Team.Name}" Style="{StaticResource Headline}" HorizontalOptions="Center"/>
+            <Label Text="{Binding Team.Description}" HorizontalOptions="Center" Margin="0,0,0,20"/>
+
+            <Label Text="Delegado" Style="{StaticResource TitleLarge}" />
+            <Frame Padding="10" CornerRadius="5">
+                <Label Text="{Binding Team.TeamDelegate.FullName}" />
+            </Frame>
+
+            <Label Text="Jugadores" Style="{StaticResource TitleLarge}" Margin="0,20,0,0"/>
+            <CollectionView ItemsSource="{Binding Team.Players}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Player">
+                        <Frame Padding="10" Margin="0,5" CornerRadius="5">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="{Binding FullName}" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" Text="{Binding JerseyNumber, StringFormat='Camiseta: {0}'}" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+             <Button Text="Añadir Jugador" Command="{Binding AddPlayerCommand}" Margin="10"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

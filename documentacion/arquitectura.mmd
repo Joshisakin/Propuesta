@@ -1,0 +1,23 @@
+```mermaid
+graph TD
+    %% Definición de nodos principales
+    A[Cliente MAUI]
+    B[API REST]
+    C[SQL Server]
+    D[Core]
+    E[Pagos]
+
+    %% Conexiones principales
+    A --> B
+    B --> C & D & E
+
+    %% Módulos de negocio
+    D --> D1 & D2 & D3 & D4 & D5 & D6 & D7 & D8
+    D1[Campeonatos]
+    D2[Inscripciones]
+    D3[Equipos]
+    D4[Fixtures]
+    D5[Resultados]
+    D6[Posiciones]
+    D7[Validación]
+    D8[Notificaciones]

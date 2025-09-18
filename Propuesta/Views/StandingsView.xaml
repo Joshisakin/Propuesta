@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Propuesta.Models"
+             xmlns:viewmodels="clr-namespace:Propuesta.ViewModels"
+             x:Class="Propuesta.Views.StandingsView"
+             Title="Tabla de Posiciones">
+    <ContentPage.BindingContext>
+        <viewmodels:StandingsViewModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+            <Label Text="Grupo A" Style="{StaticResource TitleLarge}" HorizontalOptions="Center" Margin="0,0,0,10"/>
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto" RowSpacing="5" ColumnSpacing="10">
+                <!-- Header -->
+                <Label Grid.Column="0" Text="Equipo" FontAttributes="Bold"/>
+                <Label Grid.Column="1" Text="PJ" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label Grid.Column="2" Text="PTS" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label Grid.Column="3" Text="GF" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label Grid.Column="4" Text="GC" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label Grid.Column="5" Text="DG" FontAttributes="Bold" HorizontalOptions="Center"/>
+            </Grid>
+
+            <BoxView HeightRequest="1" Color="{StaticResource Gray200}" Margin="0,5"/>
+
+            <CollectionView ItemsSource="{Binding Standings}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Team">
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto" Padding="0,5" ColumnSpacing="10">
+                            <Label Grid.Column="0" Text="{Binding Name}"/>
+                            <Label Grid.Column="1" Text="{Binding MatchesPlayed}" HorizontalOptions="Center"/>
+                            <Label Grid.Column="2" Text="{Binding Points}" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Grid.Column="3" Text="{Binding GoalsFor}" HorizontalOptions="Center"/>
+                            <Label Grid.Column="4" Text="{Binding GoalsAgainst}" HorizontalOptions="Center"/>
+                            <Label Grid.Column="5" Text="{Binding GoalDifference}" HorizontalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

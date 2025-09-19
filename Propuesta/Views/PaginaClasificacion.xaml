@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Propuesta.Models"
              xmlns:viewmodels="clr-namespace:Propuesta.ViewModels"
-             x:Class="Propuesta.Views.StandingsView"
-             Title="Tabla de Posiciones">
-    <ContentPage.BindingContext>
-        <viewmodels:StandingsViewModel/>
-    </ContentPage.BindingContext>
+             x:Class="Propuesta.Views.PaginaClasificacion"
+             x:DataType="viewmodels:PaginaClasificacionViewModel"
+             Title="Clasificación">
     <ScrollView>
-        <VerticalStackLayout Padding="10">
+        <VerticalStackLayout Padding="20">
+        <Label Text="Tabla de Clasificación"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20" />
             <Label Text="Grupo A" Style="{StaticResource TitleLarge}" HorizontalOptions="Center" Margin="0,0,0,10"/>
             <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto" RowSpacing="5" ColumnSpacing="10">
                 <!-- Header -->

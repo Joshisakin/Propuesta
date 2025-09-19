@@ -1,9 +1,12 @@
+using Propuesta.ViewModels;
+
 namespace Propuesta.Views;
 
-public partial class TeamRegistrationView : ContentPage
+public partial class PaginaRegistroEquipo : ContentPage
 {
-	public TeamRegistrationView()
+	public PaginaRegistroEquipo()
 	{
 		InitializeComponent();
+		BindingContext = new PaginaRegistroEquipoViewModel();
 	}
 }

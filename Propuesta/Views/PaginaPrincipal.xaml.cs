@@ -2,11 +2,11 @@ using Propuesta.ViewModels;
 
 namespace Propuesta.Views;
 
-public partial class DashboardView : ContentPage
+public partial class PaginaPrincipal : ContentPage
 {
-	public DashboardView()
+	public PaginaPrincipal()
 	{
 		InitializeComponent();
-		BindingContext = new DashboardViewModel();
+		BindingContext = new PaginaPrincipalViewModel();
 	}
 }

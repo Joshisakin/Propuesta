@@ -1,9 +1,12 @@
+using Propuesta.ViewModels;
+
 namespace Propuesta.Views;
 
-public partial class PaymentView : ContentPage
+public partial class PaginaPago : ContentPage
 {
-	public PaymentView()
+	public PaginaPago()
 	{
 		InitializeComponent();
+		BindingContext = new PaginaPagoViewModel();
 	}
 }

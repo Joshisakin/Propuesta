@@ -9,29 +9,29 @@
     <FlyoutItem Title="Inicio" Icon="home.png">
         <ShellContent
             Title="Dashboard"
-            ContentTemplate="{DataTemplate views:DashboardView}"
-            Route="DashboardView" />
+            ContentTemplate="{DataTemplate views:PaginaPrincipal}"
+            Route="PaginaPrincipal" />
     </FlyoutItem>
 
     <FlyoutItem Title="Equipos" Icon="team.png">
         <ShellContent
             Title="Equipos"
-            ContentTemplate="{DataTemplate views:TeamsView}"
-            Route="TeamsView" />
+            ContentTemplate="{DataTemplate views:PaginaEquipos}"
+            Route="PaginaEquipos" />
     </FlyoutItem>
 
     <FlyoutItem Title="Partidos" Icon="match.png">
         <ShellContent
             Title="Partidos"
-            ContentTemplate="{DataTemplate views:MatchesView}"
-            Route="MatchesView" />
+            ContentTemplate="{DataTemplate views:PaginaPartidos}"
+            Route="PaginaPartidos" />
     </FlyoutItem>
 
     <FlyoutItem Title="Posiciones" Icon="standings.png">
         <ShellContent
             Title="Posiciones"
-            ContentTemplate="{DataTemplate views:StandingsView}"
-            Route="StandingsView" />
+            ContentTemplate="{DataTemplate views:PaginaClasificacion}"
+            Route="PaginaClasificacion" />
     </FlyoutItem>
 
 </Shell>

@@ -5,13 +5,13 @@ using System.Windows.Input;
 
 namespace Propuesta.ViewModels
 {
-    public class TeamsViewModel : ObservableObject
+    public partial class PaginaEquiposViewModel : ObservableObject
     {
         public ObservableCollection<Team> Teams { get; }
         public ICommand AddTeamCommand { get; }
         public ICommand ViewTeamCommand { get; }
 
-        public TeamsViewModel()
+        public PaginaEquiposViewModel()
         {
             Teams = new ObservableCollection<Team>(GetMockTeams());
             AddTeamCommand = new Command(async () => await GoToAddTeam());
@@ -20,18 +20,18 @@ namespace Propuesta.ViewModels
 
         private async Task GoToAddTeam()
         {
-            // Navigate to a new page to add a team
-            await Shell.Current.GoToAsync(nameof(TeamRegistrationView));
+            
+            await Shell.Current.GoToAsync(nameof(PaginaRegistroEquipo));
         }
 
         private async Task GoToViewTeam(Team team)
         {
-            // Navigate to a team details page
+            
             var navigationParameter = new Dictionary<string, object>
             {
                 { "Team", team }
             };
-            await Shell.Current.GoToAsync(nameof(TeamDetailView), navigationParameter);
+            await Shell.Current.GoToAsync(nameof(PaginaDetalleEquipo), navigationParameter);
         }
 
         private List<Team> GetMockTeams()
@@ -40,39 +40,51 @@ namespace Propuesta.ViewModels
             {
                 new Team
                 {
-                    Name = "Los Halcones",
+                    Name = "Fichi1",
                     Description = "Equipo del barrio El Carmen",
-                    LogoUrl = "dotnet_bot.png", // Using default bot image as placeholder
+                    LogoUrl = "dotnet_bot.png",
                     Players = new List<Player>
                     {
-                        new Player { FullName = "Juan Perez", JerseyNumber = 10 },
-                        new Player { FullName = "Carlos Ruiz", JerseyNumber = 7 }
+                        new Player { FullName = "Juan Perez", JerseyNumber = 10, DNI = "12345678", MobileNumber = "987654321" },
+                        new Player { FullName = "Carlos Ruiz", JerseyNumber = 7, DNI = "87654321", MobileNumber = "987654322" }
                     },
-                    TeamDelegate = new Propuesta.Models.Delegate { FullName = "Roberto Gomez" }
+                    TeamDelegate = new Propuesta.Models.Delegate { 
+                        FullName = "Roberto Gomez", 
+                        DNI = "23456789", 
+                        MobileNumber = "987654323" 
+                    }
                 },
                 new Team
                 {
-                    Name = "Los Leones",
+                    Name = "Fichi2",
                     Description = "Equipo de la urbanización La Florida",
                     LogoUrl = "dotnet_bot.png",
                     Players = new List<Player>
                     {
-                        new Player { FullName = "Miguel Torres", JerseyNumber = 9 },
-                        new Player { FullName = "Luis Mendoza", JerseyNumber = 5 }
+                        new Player { FullName = "Miguel Torres", JerseyNumber = 9, DNI = "34567890", MobileNumber = "987654324" },
+                        new Player { FullName = "Luis Mendoza", JerseyNumber = 5, DNI = "45678901", MobileNumber = "987654325" }
                     },
-                    TeamDelegate = new Propuesta.Models.Delegate { FullName = "Ana Rodriguez" }
+                    TeamDelegate = new Propuesta.Models.Delegate { 
+                        FullName = "Ana Rodriguez", 
+                        DNI = "56789012", 
+                        MobileNumber = "987654326" 
+                    }
                 },
                  new Team
                 {
-                    Name = "Tiburones FC",
+                    Name = "inmortales fisi",
                     Description = "Equipo de la playa",
                     LogoUrl = "dotnet_bot.png",
                     Players = new List<Player>
                     {
-                        new Player { FullName = "Pedro Pascal", JerseyNumber = 9 },
-                        new Player { FullName = "Luis Diaz", JerseyNumber = 5 }
+                        new Player { FullName = "Pedro Pascal", JerseyNumber = 9, DNI = "67890123", MobileNumber = "987654327" },
+                        new Player { FullName = "Luis Diaz", JerseyNumber = 5, DNI = "78901234", MobileNumber = "987654328" }
                     },
-                    TeamDelegate = new Propuesta.Models.Delegate { FullName = "Jorge Jimenez" }
+                    TeamDelegate = new Propuesta.Models.Delegate { 
+                        FullName = "Jorge Jimenez", 
+                        DNI = "89012345", 
+                        MobileNumber = "987654329" 
+                    }
                 }
             };
         }

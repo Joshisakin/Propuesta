@@ -4,10 +4,10 @@ using System.Windows.Input;
 namespace Propuesta.ViewModels
 {
     [QueryProperty(nameof(Team), "Team")]
-    public class TeamDetailViewModel : ObservableObject
+    public partial class PaginaDetalleEquipoViewModel : ObservableObject, IQueryAttributable
     {
-        private Team _team;
-        public Team Team
+        private Team? _team;
+        public Team? Team
         {
             get => _team;
             set
@@ -19,24 +19,35 @@ namespace Propuesta.ViewModels
 
         public ICommand AddPlayerCommand { get; }
 
-        public TeamDetailViewModel()
+        public PaginaDetalleEquipoViewModel()
         {
             AddPlayerCommand = new Command(async () => await AddPlayer());
         }
 
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.TryGetValue("Team", out var teamValue) && teamValue is Team team)
+            {
+                Team = team;
+            }
+        }
+
         private async Task AddPlayer()
         {
-            // Logic to add a new player
-            string newPlayerName = await Application.Current.MainPage.DisplayPromptAsync("Nuevo Jugador", "Nombre del jugador:");
+            if (Team == null) return;
+
+            var window = Application.Current?.Windows?.FirstOrDefault();
+            if (window?.Page == null) return;
+
+            
+            string? newPlayerName = await window.Page.DisplayPromptAsync("Nuevo Jugador", "Nombre del jugador:");
             if (!string.IsNullOrWhiteSpace(newPlayerName))
             {
-                string jerseyNumberStr = await Application.Current.MainPage.DisplayPromptAsync("Nuevo Jugador", "Número de camiseta:");
+                string? jerseyNumberStr = await window.Page.DisplayPromptAsync("Nuevo Jugador", "Número de camiseta:");
                 if (int.TryParse(jerseyNumberStr, out int jerseyNumber))
                 {
-                    var newPlayer = new Player { FullName = newPlayerName, JerseyNumber = jerseyNumber };
+                    var newPlayer = new Player { FullName = newPlayerName, JerseyNumber = jerseyNumber, DNI = "", MobileNumber = "" };
                     Team.Players.Add(newPlayer);
-                    // This is a temporary solution. In a real app, you would have a proper collection that notifies changes.
-                    // For the prototype, we can force a refresh of the Team property.
                     var tempTeam = Team;
                     Team = null;
                     Team = tempTeam;

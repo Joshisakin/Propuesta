@@ -4,12 +4,12 @@ using System.Windows.Input;
 
 namespace Propuesta.ViewModels
 {
-    public class MatchesViewModel : ObservableObject
+    public partial class PaginaPartidosViewModel : ObservableObject
     {
         public ObservableCollection<Match> Matches { get; }
         public ICommand RecordResultCommand { get; }
 
-        public MatchesViewModel()
+        public PaginaPartidosViewModel()
         {
             Matches = new ObservableCollection<Match>(GetMockMatches());
             RecordResultCommand = new Command<Match>(async (match) => await RecordResult(match));
@@ -17,26 +17,30 @@ namespace Propuesta.ViewModels
 
         private async Task RecordResult(Match match)
         {
-            string homeScoreStr = await Application.Current.MainPage.DisplayPromptAsync("Resultado", $"Goles de {match.HomeTeam.Name}:");
-            string awayScoreStr = await Application.Current.MainPage.DisplayPromptAsync("Resultado", $"Goles de {match.AwayTeam.Name}:");
+            var window = Application.Current?.Windows?.FirstOrDefault();
+            if (window?.Page == null) return;
+
+            string? homeScoreStr = await window.Page.DisplayPromptAsync("Resultado", $"Goles de {match.HomeTeam.Name}:");
+            if (homeScoreStr == null) return;
+
+            string? awayScoreStr = await window.Page.DisplayPromptAsync("Resultado", $"Goles de {match.AwayTeam.Name}:");
+            if (awayScoreStr == null) return;
 
             if (int.TryParse(homeScoreStr, out int homeScore) && int.TryParse(awayScoreStr, out int awayScore))
             {
                 match.HomeScore = homeScore;
                 match.AwayScore = awayScore;
                 match.IsResultConfirmed = true;
-
-                // In a real app, you would update points and standings here.
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Por favor, ingrese un marcador válido.", "OK");
+                await window.Page.DisplayAlert("Error", "Por favor, ingrese un marcador válido.", "OK");
             }
         }
 
         private List<Match> GetMockMatches()
         {
-            var teams = new TeamsViewModel().Teams; // Get mock teams
+            var teams = new PaginaEquiposViewModel().Teams;
             return new List<Match>
             {
                 new Match

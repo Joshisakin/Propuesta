@@ -3,44 +3,44 @@ using System.Windows.Input;
 
 namespace Propuesta.ViewModels
 {
-    public class TeamRegistrationViewModel : ObservableObject
+    public partial class PaginaRegistroEquipoViewModel : ObservableObject
     {
-        private string _teamName;
+        private string _teamName = string.Empty;
         public string TeamName
         {
             get => _teamName;
             set { _teamName = value; OnPropertyChanged(); }
         }
 
-        private string _teamDescription;
+        private string _teamDescription = string.Empty;
         public string TeamDescription
         {
             get => _teamDescription;
             set { _teamDescription = value; OnPropertyChanged(); }
         }
 
-        private string _logoPath = "dotnet_bot.png"; // Default logo
+        private string _logoPath = "dotnet_bot.png";
         public string LogoPath
         {
             get => _logoPath;
             set { _logoPath = value; OnPropertyChanged(); }
         }
 
-        private string _delegateName;
+        private string _delegateName = string.Empty;
         public string DelegateName
         {
             get => _delegateName;
             set { _delegateName = value; OnPropertyChanged(); }
         }
 
-        private string _delegateDNI;
+        private string _delegateDNI = string.Empty;
         public string DelegateDNI
         {
             get => _delegateDNI;
             set { _delegateDNI = value; OnPropertyChanged(); }
         }
 
-        private string _delegateMobile;
+        private string _delegateMobile = string.Empty;
         public string DelegateMobile
         {
             get => _delegateMobile;
@@ -50,7 +50,7 @@ namespace Propuesta.ViewModels
         public ICommand SaveTeamCommand { get; }
         public ICommand SelectLogoCommand { get; }
 
-        public TeamRegistrationViewModel()
+        public PaginaRegistroEquipoViewModel()
         {
             SaveTeamCommand = new Command(async () => await SaveTeam());
             SelectLogoCommand = new Command(async () => await SelectLogo());
@@ -60,22 +60,32 @@ namespace Propuesta.ViewModels
         {
             if (string.IsNullOrWhiteSpace(TeamName) || string.IsNullOrWhiteSpace(DelegateName))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "El nombre del equipo y del delegado son obligatorios.", "OK");
+                var window = Application.Current?.Windows?.FirstOrDefault();
+                if (window?.Page is not null)
+                {
+                    await window.Page.DisplayAlert("Error", "El nombre del equipo y del delegado son obligatorios.", "OK");
+                }
                 return;
             }
 
-            // In a real app, you would save this to a database and update the main team list.
-            // For this prototype, we'll just show an alert and navigate back.
-            await Application.Current.MainPage.DisplayAlert("Éxito", $"Equipo '{TeamName}' guardado correctamente.", "OK");
-            await Shell.Current.GoToAsync(".."); // Go back to the previous page
+            var mainWindow = Application.Current?.Windows?.FirstOrDefault();
+            if (mainWindow?.Page is not null)
+            {
+                await mainWindow.Page.DisplayAlert("Éxito", $"Equipo '{TeamName}' guardado correctamente.", "OK");
+                await Shell.Current.GoToAsync(".."); 
+            }
         }
 
         private async Task SelectLogo()
         {
-            // This simulates selecting a file. In a real app, you'd use a file picker.
-            await Application.Current.MainPage.DisplayAlert("Simulación", "Aquí se abriría un selector de archivos para elegir el logo del equipo.", "OK");
-            // For the prototype, we can pretend a logo was selected.
-            LogoPath = "dotnet_bot.png";
+           
+            var window = Application.Current?.Windows?.FirstOrDefault();
+            if (window?.Page is not null)
+            {
+                await window.Page.DisplayAlert("Simulación", "Aquí se abriría un selector de archivos para elegir el logo del equipo.", "OK");
+                
+                LogoPath = "dotnet_bot.png";
+            }
         }
     }
 }

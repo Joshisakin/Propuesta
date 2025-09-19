@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:Propuesta.Models"
              xmlns:viewmodels="clr-namespace:Propuesta.ViewModels"
-             x:Class="Propuesta.Views.TeamsView"
+             xmlns:models="clr-namespace:Propuesta.Models"
+             x:Class="Propuesta.Views.PaginaEquipos"
+             x:DataType="viewmodels:PaginaEquiposViewModel"
              Title="Equipos">
-    <ContentPage.BindingContext>
-        <viewmodels:TeamsViewModel/>
-    </ContentPage.BindingContext>
-    <Grid RowDefinitions="*,Auto">
+    <VerticalStackLayout Padding="20">
+        <Label Text="Listado de Equipos"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20" />
+
         <CollectionView ItemsSource="{Binding Teams}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Team">
@@ -19,13 +23,13 @@
                                 <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium"/>
                                 <Label Text="{Binding Description}" FontSize="Small"/>
                             </VerticalStackLayout>
-                            <Button Grid.Column="2" Text="Ver" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TeamsViewModel}}, Path=ViewTeamCommand}" CommandParameter="{Binding .}"/>
+                            <Button Grid.Column="2" Text="Ver" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PaginaEquiposViewModel}}, Path=ViewTeamCommand}" CommandParameter="{Binding .}"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Grid.Row="1" Text="Registrar Nuevo Equipo" Command="{Binding AddTeamCommand}" Margin="10"/>
-    </Grid>
+        <Button Text="Registrar Nuevo Equipo" Command="{Binding AddTeamCommand}" Margin="10"/>
+    </VerticalStackLayout>
 </ContentPage>

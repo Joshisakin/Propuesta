@@ -1,9 +1,12 @@
+using Propuesta.ViewModels;
+
 namespace Propuesta.Views;
 
-public partial class StandingsView : ContentPage
+public partial class PaginaClasificacion : ContentPage
 {
-	public StandingsView()
+	public PaginaClasificacion()
 	{
 		InitializeComponent();
+		BindingContext = new PaginaClasificacionViewModel();
 	}
 }

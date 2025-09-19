@@ -2,11 +2,11 @@ using Propuesta.ViewModels;
 
 namespace Propuesta.Views;
 
-public partial class TeamDetailView : ContentPage
+public partial class PaginaDetalleEquipo : ContentPage
 {
-	public TeamDetailView()
+	public PaginaDetalleEquipo()
 	{
 		InitializeComponent();
-		// The BindingContext will be set from the navigation parameters
+		BindingContext = new PaginaDetalleEquipoViewModel();
 	}
 }

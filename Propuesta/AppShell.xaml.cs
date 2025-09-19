@@ -8,11 +8,11 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 
-		Routing.RegisterRoute(nameof(TeamDetailView), typeof(TeamDetailView));
-		Routing.RegisterRoute(nameof(TeamRegistrationView), typeof(TeamRegistrationView));
-		Routing.RegisterRoute(nameof(PaymentView), typeof(PaymentView));
-        Routing.RegisterRoute(nameof(MatchesView), typeof(MatchesView));
-        Routing.RegisterRoute(nameof(StandingsView), typeof(StandingsView));
-        Routing.RegisterRoute(nameof(TeamsView), typeof(TeamsView));
+		Routing.RegisterRoute(nameof(PaginaDetalleEquipo), typeof(PaginaDetalleEquipo));
+		Routing.RegisterRoute(nameof(PaginaRegistroEquipo), typeof(PaginaRegistroEquipo));
+		Routing.RegisterRoute(nameof(PaginaPago), typeof(PaginaPago));
+        Routing.RegisterRoute(nameof(PaginaPartidos), typeof(PaginaPartidos));
+        Routing.RegisterRoute(nameof(PaginaClasificacion), typeof(PaginaClasificacion));
+        Routing.RegisterRoute(nameof(PaginaEquipos), typeof(PaginaEquipos));
 	}
 }

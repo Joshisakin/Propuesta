@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace Propuesta.ViewModels
 {
-    public class PaymentViewModel : ObservableObject
+    public partial class PaginaPagoViewModel : ObservableObject
     {
         private decimal _amount;
         public decimal Amount
@@ -16,7 +16,7 @@ namespace Propuesta.ViewModels
         }
 
         public List<string> PaymentMethods { get; }
-        private string _selectedPaymentMethod;
+        private string _selectedPaymentMethod = string.Empty;
         public string SelectedPaymentMethod
         {
             get => _selectedPaymentMethod;
@@ -25,9 +25,9 @@ namespace Propuesta.ViewModels
 
         public ICommand ProcessPaymentCommand { get; }
 
-        public PaymentViewModel()
+        public PaginaPagoViewModel()
         {
-            Amount = 100.00m; // Default inscription fee
+            Amount = 100.00m;
             PaymentMethods = Enum.GetNames(typeof(PaymentMethod)).ToList();
             SelectedPaymentMethod = PaymentMethods.First();
             ProcessPaymentCommand = new Command(async () => await ProcessPayment());
@@ -37,17 +37,21 @@ namespace Propuesta.ViewModels
         {
             if (Amount <= 0)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Por favor, ingrese un monto válido.", "OK");
+                var window = Application.Current?.Windows?.FirstOrDefault();
+                if (window?.Page is not null)
+                {
+                    await window.Page.DisplayAlert("Error", "Por favor, ingrese un monto válido.", "OK");
+                }
                 return;
             }
 
-            // This simulates payment processing.
-            await Application.Current.MainPage.DisplayAlert("Simulación de Pago", $"Procesando pago de S/ {Amount:F2} con {SelectedPaymentMethod}.", "OK");
-
-            // In a real app, you would handle the payment gateway integration here.
-            // For this prototype, we'll just show a success message and navigate back.
-            await Application.Current.MainPage.DisplayAlert("Éxito", "Pago procesado correctamente.", "OK");
-            await Shell.Current.GoToAsync(".."); // Go back to the previous page
+            var mainWindow = Application.Current?.Windows?.FirstOrDefault();
+            if (mainWindow?.Page is not null)
+            {
+                await mainWindow.Page.DisplayAlert("Simulación de Pago", $"Procesando pago de S/ {Amount:F2} con {SelectedPaymentMethod}.", "OK");
+                await mainWindow.Page.DisplayAlert("Éxito", "Pago procesado correctamente.", "OK");
+            }
+            await Shell.Current.GoToAsync(".."); 
         }
     }
 }

@@ -1,9 +1,12 @@
+using Propuesta.ViewModels;
+
 namespace Propuesta.Views;
 
-public partial class MatchesView : ContentPage
+public partial class PaginaPartidos : ContentPage
 {
-	public MatchesView()
+	public PaginaPartidos()
 	{
 		InitializeComponent();
+		BindingContext = new PaginaPartidosViewModel();
 	}
 }

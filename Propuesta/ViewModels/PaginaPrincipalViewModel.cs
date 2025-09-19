@@ -4,39 +4,41 @@ using System.Windows.Input;
 
 namespace Propuesta.ViewModels
 {
-    public class DashboardViewModel : ObservableObject
+    public partial class PaginaPrincipalViewModel : ObservableObject
     {
-        public ICommand GoToTeamsCommand { get; }
-        public ICommand GoToMatchesCommand { get; }
-        public ICommand GoToStandingsCommand { get; }
-        public ICommand GoToRegisterPaymentCommand { get; }
+        public ICommand IrAEquiposCommand { get; }
+        public ICommand IrAPartidosCommand { get; }
+        public ICommand IrAClasificacionCommand { get; }
+        public ICommand IrARegistrarPagoCommand { get; }
 
-        public DashboardViewModel()
+        public PaginaPrincipalViewModel()
         {
-            GoToTeamsCommand = new Command(async () => await GoToTeams());
-            GoToMatchesCommand = new Command(async () => await GoToMatches());
-            GoToStandingsCommand = new Command(async () => await GoToStandings());
-            GoToRegisterPaymentCommand = new Command(async () => await GoToRegisterPayment());
+            IrAEquiposCommand = new Command(async () => await IrAEquipos());
+            IrAPartidosCommand = new Command(async () => await IrAPartidos());
+            IrAClasificacionCommand = new Command(async () => await IrAClasificacion());
+            IrARegistrarPagoCommand = new Command(async () => await IrARegistrarPago());
         }
 
-        private async Task GoToTeams()
+        private async Task IrAEquipos()
         {
-            await Shell.Current.GoToAsync(nameof(TeamsView));
+            await Shell.Current.GoToAsync(nameof(PaginaEquipos));
         }
 
-        private async Task GoToMatches()
+        private async Task IrAPartidos()
         {
-            await Shell.Current.GoToAsync(nameof(MatchesView));
+            await Shell.Current.GoToAsync(nameof(PaginaPartidos));
         }
 
-        private async Task GoToStandings()
+        private async Task IrAClasificacion()
         {
-            await Shell.Current.GoToAsync(nameof(StandingsView));
+            await Shell.Current.GoToAsync(nameof(PaginaClasificacion));
         }
 
-        private async Task GoToRegisterPayment()
+        private async Task IrARegistrarPago()
         {
-            await Shell.Current.GoToAsync(nameof(PaymentView));
+            await Shell.Current.GoToAsync(nameof(PaginaPago));
         }
+
+
     }
 }
